@@ -1,0 +1,53 @@
+package io.app.ebank.controller;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import io.app.ebank.domain.Transaction;
+import io.app.ebank.domain.TransactionResponse;
+import io.app.ebank.exceptions.RegisterTransactionException;
+import io.app.ebank.service.transaction.TransactionService;
+import io.app.ebank.utils.JsonMessage;
+
+@RestController
+public class TransactionController {
+	private final static Logger LOGGER = Logger.getLogger(TransactionController.class.getCanonicalName());
+	
+	@Autowired
+	private TransactionService transactionService;
+	
+	@RequestMapping(value="/transactions", method = RequestMethod.POST,
+	produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> registerTransaction(@RequestBody Transaction transaction) {
+		try {
+			Transaction transactionCreated = transactionService.registerTransaction(transaction);			
+
+			LOGGER.setLevel(Level.INFO);
+			LOGGER.info("Transaction Id:" + transactionCreated.getTransactionId() + " created");
+			
+			TransactionResponse response = new TransactionResponse();
+			response.parseToTransactionResponse(transaction);
+
+			return ResponseEntity.ok().body(response);
+		} catch (RegisterTransactionException e) {
+			LOGGER.setLevel(Level.WARNING);
+			LOGGER.info(e.getMessage());
+			return ResponseEntity
+					.status(HttpStatus.UNPROCESSABLE_ENTITY)
+					.body(JsonMessage.get(e.getMessage()));			
+		} catch (Exception e) {
+			LOGGER.setLevel(Level.SEVERE);
+			LOGGER.info(e.getMessage());			
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+	}
+}

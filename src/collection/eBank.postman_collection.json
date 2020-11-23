@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "7b21e71b-547c-471c-b79a-aa62bd6624e3",
+		"name": "eBank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateAccount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"documentNumber\": \"02244187471\",\r\n\t\"name\": \"Janaina\",\r\n\t\"email\": \"janaina@gmail.com\",\r\n\t\"telephone\": \"84911014635\"\t\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8761/account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8761",
+					"path": [
+						"account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAccounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8761/account/id/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8761",
+					"path": [
+						"account",
+						"id",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transactions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"accountId\": 1, \r\n    \"operationTypeId\": \"COMPRA_A_VISTA\", \r\n    \"amount\": 20.45 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8761/transactions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8761",
+					"path": [
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
