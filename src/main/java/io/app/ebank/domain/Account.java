@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.*;
 
 @Entity
 @Table(name="Accounts")
@@ -14,11 +15,18 @@ public class Account implements Serializable {
 	
 	@Id
 	@Column(name="account_id")
+	@NotNull(message = "Account id is required")
 	private Long accountId;	
+	
 	@Column(name="document_number")
+	@NotNull(message = "Document number is required")
 	private Long documentNumber;	
+
+	@NotEmpty(message = "Customer name is required")
 	private String name;
 	private String email;
+	
+	@NotEmpty(message = "Telephone number is required")
 	private String telephone;	
 	
 	public Account() {
