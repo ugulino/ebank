@@ -3,6 +3,8 @@ package io.app.ebank.controller;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,16 +29,13 @@ public class TransactionController {
 	
 	@RequestMapping(value="/transactions", method = RequestMethod.POST,
 	produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> registerTransaction(@RequestBody Transaction transaction) {
+	public ResponseEntity<Object> registerTransaction(@Valid @RequestBody Transaction transaction) {
 		try {
 			Transaction transactionCreated = transactionService.registerTransaction(transaction);			
-
 			LOGGER.setLevel(Level.INFO);
 			LOGGER.info("Transaction Id:" + transactionCreated.getTransactionId() + " created");
-			
 			TransactionResponse response = new TransactionResponse();
 			response.parseToTransactionResponse(transaction);
-
 			return ResponseEntity.ok().body(response);
 		} catch (RegisterTransactionException e) {
 			LOGGER.setLevel(Level.WARNING);

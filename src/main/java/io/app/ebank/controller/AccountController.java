@@ -18,6 +18,8 @@ import io.app.ebank.utils.JsonMessage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.validation.Valid;
+
 @RestController
 public class AccountController {
 	private final static Logger LOGGER = Logger.getLogger(AccountController.class.getName());
@@ -46,7 +48,7 @@ public class AccountController {
 	
 	@RequestMapping(value = "/account", method = RequestMethod.POST,
 	produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> createAccount(@RequestBody Account account) {
+	public ResponseEntity<?> createAccount(@Valid @RequestBody Account account) {
 		try {
 			accountService.createAccount(account);
 			LOGGER.setLevel(Level.INFO);
