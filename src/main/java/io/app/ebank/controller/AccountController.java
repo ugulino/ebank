@@ -48,7 +48,7 @@ public class AccountController {
 	
 	@RequestMapping(value = "/account", method = RequestMethod.POST,
 	produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> createAccount(@Valid @RequestBody Account account) {
+	public ResponseEntity<String> createAccount(@Valid @RequestBody Account account) {
 		try {
 			accountService.createAccount(account);
 			LOGGER.setLevel(Level.INFO);
