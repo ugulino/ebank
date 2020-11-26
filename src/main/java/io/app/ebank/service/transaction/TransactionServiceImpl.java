@@ -1,17 +1,15 @@
 package io.app.ebank.service.transaction;
 
-import java.util.Calendar;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import io.app.ebank.domain.Transaction;
+import io.app.ebank.domain.transaction.Transaction;
 import io.app.ebank.exceptions.RegisterTransactionException;
 import io.app.ebank.repository.*;
 import io.app.ebank.service.account.AccountService;
+import io.app.ebank.utils.DateUtils;
 
 @Service
-public class TransactionImpl implements TransactionService {
+public class TransactionServiceImpl implements TransactionService {
 
 	@Autowired
 	TransactionRepository transactionRepository;
@@ -46,8 +44,7 @@ public class TransactionImpl implements TransactionService {
 			break;
 		}
 		
-		Calendar eventDate = Calendar.getInstance();
-		transaction.setEventDate(eventDate.getTime());
+		transaction.setEventDate(DateUtils.getToday());
 		Transaction transactionRegistered = transactionRepository.save(transaction);
 		return transactionRegistered;
 	}

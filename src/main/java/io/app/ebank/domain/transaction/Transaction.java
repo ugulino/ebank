@@ -1,4 +1,4 @@
-package io.app.ebank.domain;
+package io.app.ebank.domain.transaction;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -11,6 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.app.ebank.enums.OperationTypeEnum;
 
@@ -34,6 +39,9 @@ public class Transaction implements Serializable {
 	
 	@NotNull(message = "Amount is required")
 	private Float amount;	
+	
+	@DateTimeFormat(iso = ISO.DATE_TIME)
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")	
 	private Date eventDate;
 	
 	public Transaction() {
