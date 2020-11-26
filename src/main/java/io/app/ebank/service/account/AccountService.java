@@ -1,8 +1,9 @@
 package io.app.ebank.service.account;
 
-import io.app.ebank.domain.Account;
+import io.app.ebank.domain.account.AccountBody;
+import io.app.ebank.domain.account.AccountDTO;
 
 public interface AccountService {
-	public Account findAccountById(Long id);
-	public void createAccount(Account account) throws Exception;
+	public AccountDTO findAccountById(Long id);
+	public void createAccount(AccountBody account) throws Exception;
 }

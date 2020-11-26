@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.app.ebank.domain.*;
+import io.app.ebank.domain.account.AccountBody;
+import io.app.ebank.domain.account.AccountDTO;
 import io.app.ebank.exceptions.CreateAccountException;
 import io.app.ebank.service.account.AccountService;
 import io.app.ebank.utils.JsonMessage;
@@ -27,18 +28,18 @@ public class AccountController {
 	@Autowired
 	private AccountService accountService;
 	
-	@RequestMapping(value="/account/id/{id}", method = RequestMethod.GET,
+	@RequestMapping(value="/v1/account/id/{id}", method = RequestMethod.GET,
 	produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> findAccountById(@PathVariable("id") Long id) {
 		try {
-			Account account = accountService.findAccountById(id);
-			if (account == null) {
+			AccountDTO accountResponse = accountService.findAccountById(id);
+			if (accountResponse == null) {
 				LOGGER.setLevel(Level.WARNING);
 				LOGGER.info("Account not found");
 				return ResponseEntity.status(HttpStatus.NOT_FOUND)
 						.body(new String(JsonMessage.get("Account not Found")));
 			}
-			return ResponseEntity.ok().body(account);
+			return ResponseEntity.ok(accountResponse);
 		} catch (Exception e) {
 			LOGGER.setLevel(Level.SEVERE);
 			LOGGER.severe(e.getStackTrace().toString());
@@ -46,14 +47,14 @@ public class AccountController {
 		}
 	}
 	
-	@RequestMapping(value = "/account", method = RequestMethod.POST,
+	@RequestMapping(value = "/v1/account", method = RequestMethod.POST,
 	produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> createAccount(@Valid @RequestBody Account account) {
+	public ResponseEntity<String> createAccount(@Valid @RequestBody AccountBody account) {
 		try {
 			accountService.createAccount(account);
 			LOGGER.setLevel(Level.INFO);
 			LOGGER.info("Account id:" + account.getAccountId() + " created");			
-			return ResponseEntity.ok(JsonMessage.get("Account created"));
+			return ResponseEntity.status(HttpStatus.CREATED).body(JsonMessage.get("Account created"));
 		} catch (CreateAccountException e) {
 			LOGGER.setLevel(Level.INFO);
 			LOGGER.severe(e.getMessage());			

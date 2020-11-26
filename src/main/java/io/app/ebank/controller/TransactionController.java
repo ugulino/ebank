@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.app.ebank.domain.Transaction;
-import io.app.ebank.domain.TransactionResponse;
+import io.app.ebank.domain.transaction.Transaction;
+import io.app.ebank.domain.transaction.TransactionResponse;
 import io.app.ebank.exceptions.RegisterTransactionException;
 import io.app.ebank.service.transaction.TransactionService;
 import io.app.ebank.utils.JsonMessage;
@@ -27,15 +27,14 @@ public class TransactionController {
 	@Autowired
 	private TransactionService transactionService;
 	
-	@RequestMapping(value="/transactions", method = RequestMethod.POST,
+	@RequestMapping(value="/v1/transactions", method = RequestMethod.POST,
 	produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> registerTransaction(@Valid @RequestBody Transaction transaction) {
 		try {
 			Transaction transactionCreated = transactionService.registerTransaction(transaction);			
 			LOGGER.setLevel(Level.INFO);
 			LOGGER.info("Transaction Id:" + transactionCreated.getTransactionId() + " created");
-			TransactionResponse response = new TransactionResponse();
-			response.parseToTransactionResponse(transaction);
+			TransactionResponse response = new TransactionResponse(transaction);
 			return ResponseEntity.ok().body(response);
 		} catch (RegisterTransactionException e) {
 			LOGGER.setLevel(Level.WARNING);

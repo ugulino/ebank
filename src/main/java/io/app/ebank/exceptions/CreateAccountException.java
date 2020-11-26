@@ -9,4 +9,8 @@ public class CreateAccountException extends Exception {
     public CreateAccountException(String errorMessage) {
         super(errorMessage);
     }
+
+	public CreateAccountException(String errorMessage, Throwable cause){
+		super(errorMessage, cause);
+	}    
 }

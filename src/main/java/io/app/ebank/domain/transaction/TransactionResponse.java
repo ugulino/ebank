@@ -1,4 +1,4 @@
-package io.app.ebank.domain;
+package io.app.ebank.domain.transaction;
 
 import java.util.Date;
 
@@ -12,14 +12,12 @@ public class TransactionResponse {
 	public TransactionResponse() {
 	}
 	
-	public TransactionResponse parseToTransactionResponse(Transaction transaction) {
+	public TransactionResponse(Transaction transaction) {
 		this.transactionId = transaction.getTransactionId();
 		this.accountId = transaction.getAccountId();
 		this.operationTypeId = transaction.getOperationTypeId().ordinal();
 		this.amount = transaction.getAmount();
 		this.eventDate = transaction.getEventDate();
-		
-		return this;
 	}
 	
 	public Long getTransactionId() {
