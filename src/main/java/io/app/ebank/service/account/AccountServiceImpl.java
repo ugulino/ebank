@@ -50,4 +50,17 @@ public class AccountServiceImpl implements AccountService {
 		accountRepository.save(account);
 	}
 
+	@Override
+	public void atualizaLimiteCredito(Long idAccount, Float amount) throws Exception {
+		Account account = accountRepository.findById(idAccount).get();
+		if (account != null) {
+			Float limiteAtualizado = account.getLimiteCredito();
+			limiteAtualizado = limiteAtualizado + amount;
+			if (limiteAtualizado < 0) {
+				throw new Exception("Account already registered");
+			}
+			account.setLimiteCredito(limiteAtualizado);
+			accountRepository.save(account);
+		}
+	}
 }

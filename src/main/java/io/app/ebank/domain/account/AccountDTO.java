@@ -6,7 +6,8 @@ public class AccountDTO {
 	@NotNull(message = "Account id is required")
 	private Long accountId;	
 	private Long documentNumber;	
-	private String name;	
+	private String name;
+	private Float limiteCredito;
 	
 	public Long getDocumentNumber() {
 		return documentNumber;
@@ -19,6 +20,7 @@ public class AccountDTO {
 		this.accountId = account.getAccountId();
 		this.documentNumber = account.getCustomer().getDocumentNumber();
 		this.name = account.getCustomer().getName();
+		this.limiteCredito = account.getLimiteCredito();
 	}
 	
 	public void setDocumentNumber(Long documentNumber) {
@@ -35,5 +37,13 @@ public class AccountDTO {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Float getLimiteCredito() {
+		return limiteCredito;
+	}
+
+	public void setLimiteCredito(Float limiteCredito) {
+		this.limiteCredito = limiteCredito;
 	}
 }
