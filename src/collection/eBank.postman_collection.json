@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"documentNumber\": \"02244187471\",\r\n\t\"name\": \"Janaina\",\r\n\t\"email\": \"janaina@gmail.com\",\r\n\t\"telephone\": \"84911014635\"\t\r\n}",
+					"raw": "{\r\n    \"accountId\": \"1\",\r\n\t\"documentNumber\": \"02144187472\",\r\n\t\"name\": \"Fabiano\",\r\n\t\"email\": \"fabiano@gmail.com\",\r\n\t\"telephone\": \"84931014135\"\t\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -20,13 +20,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8761/account",
+					"raw": "http://localhost:8761/v1/account",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8761",
 					"path": [
+						"v1",
 						"account"
 					]
 				}
@@ -39,13 +40,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8761/account/id/1",
+					"raw": "http://localhost:8761/v1/account/id/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8761",
 					"path": [
+						"v1",
 						"account",
 						"id",
 						"1"
@@ -61,7 +63,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \r\n    \"accountId\": 1, \r\n    \"operationTypeId\": \"COMPRA_A_VISTA\", \r\n    \"amount\": 20.45 \r\n}",
+					"raw": "{ \r\n    \"accountId\": 2, \r\n    \"operationTypeId\": \"PAGAMENTO\", \r\n    \"amount\": 20.45 \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -69,13 +71,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8761/transactions",
+					"raw": "http://localhost:8761/v1/transactions",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8761",
 					"path": [
+						"v1",
 						"transactions"
 					]
 				}
