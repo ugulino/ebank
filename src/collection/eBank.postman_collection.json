@@ -1,10 +1,17 @@
 {
-	"info": {
-		"_postman_id": "7b21e71b-547c-471c-b79a-aa62bd6624e3",
-		"name": "eBank",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
+	"id": "bfde4994-2377-3087-bf32-dc230b5da1e0",
+	"name": "eBank",
+	"description": "",
+	"order": [
+		"3e359184-2248-b298-1642-bfe8fbccad62",
+		"69e27ea1-1e6a-7c45-6658-7fa7fd9e840a",
+		"fc092d0c-5984-ffe0-c278-4183ad311a9b"
+	],
+	"folders_order": [],
+	"folders": [],
+	"owner": "4500966",
+	"hasRequests": true,
+	"requests": [
 		{
 			"name": "CreateAccount",
 			"request": {
@@ -31,10 +38,41 @@
 						"account"
 					]
 				}
-			},
-			"response": []
+			],
+			"url": "http://localhost:8761/account",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1606146778238,
+			"name": "CreateAccount",
+			"description": "",
+			"collectionId": "bfde4994-2377-3087-bf32-dc230b5da1e0",
+			"responses": [],
+			"rawModeData": "{\r\n\t\"accountId\": 1,\r\n\t\"documentNumber\": \"02244187471\",\r\n\t\"name\": \"Janaina\",\r\n\t\"email\": \"janaina@gmail.com\",\r\n\t\"telephone\": \"84911014635\"\t\r\n}"
 		},
 		{
+			"id": "69e27ea1-1e6a-7c45-6658-7fa7fd9e840a",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:8761/account/id/1",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1606146784314,
 			"name": "GetAccounts",
 			"request": {
 				"method": "GET",
@@ -82,9 +120,24 @@
 						"transactions"
 					]
 				}
-			},
-			"response": []
+			],
+			"url": "http://localhost:8761/transactions",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1606146946602,
+			"name": "Transactions",
+			"description": "",
+			"collectionId": "bfde4994-2377-3087-bf32-dc230b5da1e0",
+			"responses": [],
+			"rawModeData": "{ \r\n    \"accountId\": 1, \r\n    \"operationTypeId\": \"COMPRA_A_VISTA\", \r\n    \"amount\": 20.45 \r\n}"
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
