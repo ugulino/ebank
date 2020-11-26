@@ -13,14 +13,30 @@
 	"hasRequests": true,
 	"requests": [
 		{
-			"id": "3e359184-2248-b298-1642-bfe8fbccad62",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
+			"name": "CreateAccount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accountId\": \"1\",\r\n\t\"documentNumber\": \"02144187472\",\r\n\t\"name\": \"Fabiano\",\r\n\t\"email\": \"fabiano@gmail.com\",\r\n\t\"telephone\": \"84931014135\"\t\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8761/v1/account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8761",
+					"path": [
+						"v1",
+						"account"
+					]
 				}
 			],
 			"url": "http://localhost:8761/account",
@@ -58,19 +74,51 @@
 			"helperAttributes": {},
 			"time": 1606146784314,
 			"name": "GetAccounts",
-			"description": "",
-			"collectionId": "bfde4994-2377-3087-bf32-dc230b5da1e0",
-			"responses": []
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8761/v1/account/id/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8761",
+					"path": [
+						"v1",
+						"account",
+						"id",
+						"1"
+					]
+				}
+			},
+			"response": []
 		},
 		{
-			"id": "fc092d0c-5984-ffe0-c278-4183ad311a9b",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
+			"name": "Transactions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"accountId\": 2, \r\n    \"operationTypeId\": \"PAGAMENTO\", \r\n    \"amount\": 20.45 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8761/v1/transactions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8761",
+					"path": [
+						"v1",
+						"transactions"
+					]
 				}
 			],
 			"url": "http://localhost:8761/transactions",
