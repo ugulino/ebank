@@ -1,2 +1,2 @@
-# efinancial
+# ebank
 Financial application project
