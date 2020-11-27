@@ -10,6 +10,7 @@ import io.app.ebank.domain.account.AccountBody;
 import io.app.ebank.domain.account.AccountDTO;
 import io.app.ebank.domain.customer.Customer;
 import io.app.ebank.exceptions.CreateAccountException;
+import io.app.ebank.exceptions.LimiteAccountException;
 import io.app.ebank.repository.AccountRepository;
 import io.app.ebank.repository.CustomerRepository;
 
@@ -57,7 +58,7 @@ public class AccountServiceImpl implements AccountService {
 			Float limiteAtualizado = account.getLimiteCredito();
 			limiteAtualizado = limiteAtualizado + amount;
 			if (limiteAtualizado < 0) {
-				throw new Exception("Account already registered");
+				throw new LimiteAccountException("Limit Exceeded");
 			}
 			account.setLimiteCredito(limiteAtualizado);
 			accountRepository.save(account);

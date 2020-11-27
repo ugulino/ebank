@@ -3,7 +3,6 @@ package io.app.ebank.service.transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import io.app.ebank.domain.account.Account;
 import io.app.ebank.domain.account.AccountDTO;
 import io.app.ebank.domain.transaction.Transaction;
 import io.app.ebank.exceptions.RegisterTransactionException;
