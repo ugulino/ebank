@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.app.ebank.domain.transaction.Transaction;
 import io.app.ebank.domain.transaction.TransactionResponse;
+import io.app.ebank.exceptions.LimiteAccountException;
 import io.app.ebank.exceptions.RegisterTransactionException;
 import io.app.ebank.service.transaction.TransactionService;
 import io.app.ebank.utils.JsonMessage;
@@ -36,6 +37,11 @@ public class TransactionController {
 			LOGGER.info("Transaction Id:" + transactionCreated.getTransactionId() + " created");
 			TransactionResponse response = new TransactionResponse(transaction);
 			return ResponseEntity.ok().body(response);
+		} catch (LimiteAccountException e) {
+			LOGGER.setLevel(Level.INFO);
+			return ResponseEntity
+					.status(HttpStatus.CONFLICT)
+					.body(JsonMessage.get(e.getMessage()));					
 		} catch (RegisterTransactionException e) {
 			LOGGER.setLevel(Level.WARNING);
 			LOGGER.info(e.getMessage());

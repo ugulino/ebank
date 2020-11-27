@@ -2,6 +2,8 @@ package io.app.ebank.service.transaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import io.app.ebank.domain.account.AccountDTO;
 import io.app.ebank.domain.transaction.Transaction;
 import io.app.ebank.exceptions.RegisterTransactionException;
 import io.app.ebank.repository.*;
@@ -16,16 +18,15 @@ public class TransactionServiceImpl implements TransactionService {
 	
 	@Autowired
 	AccountService accountService;
-
+	
 	private void setDebit(Transaction transaction) {
 		transaction.setAmount(transaction.getAmount()*-1);
 	}
 	
 	@Override
-	public Transaction registerTransaction(Transaction transaction) throws RegisterTransactionException {
-		boolean isAccountExists = accountService.findAccountById(transaction.getAccountId()) != null;
-		
-		if (!isAccountExists) {	
+	public Transaction registerTransaction(Transaction transaction) throws Exception {		
+		AccountDTO account = accountService.findAccountById(transaction.getAccountId()); 
+		if (account == null) {	
 			throw new RegisterTransactionException("Account not found");
 		}
 			
@@ -46,6 +47,11 @@ public class TransactionServiceImpl implements TransactionService {
 		
 		transaction.setEventDate(DateUtils.getToday());
 		Transaction transactionRegistered = transactionRepository.save(transaction);
+		
+		//Atualiza limite crédito
+		Float amount = transaction.getAmount();
+		accountService.atualizaLimiteCredito(account.getAccountId(), amount);
+		
 		return transactionRegistered;
 	}
 }

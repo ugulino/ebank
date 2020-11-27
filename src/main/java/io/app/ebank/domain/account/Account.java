@@ -30,6 +30,9 @@ public class Account implements Serializable {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "documentNumber")	
 	private Customer customer;
+    
+    // TODO: Impedir limite menor que zero
+    private Float limiteCredito = 0.00f;
 	
 	public Account() {
 	}
@@ -47,5 +50,13 @@ public class Account implements Serializable {
 	}
 	public void setAccountId(Long accountId) {
 		this.accountId = accountId;
+	}
+
+	public Float getLimiteCredito() {
+		return limiteCredito;
+	}
+
+	public void setLimiteCredito(Float limiteCredito) {
+		this.limiteCredito = limiteCredito;
 	}
 }
